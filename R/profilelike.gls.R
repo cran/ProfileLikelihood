@@ -6,9 +6,9 @@ function(formula, data, correlation=NULL, subject, profile.theta, method="ML", l
 	if(!is.null(weights)){
 		stop("Warning message: 'weights' should not be provided")
 	}
-m <- model.frame(formula, data)
-X <- model.matrix(formula, m)
-y <- model.response(m)
+m <- stats::model.frame(formula, data)
+X <- stats::model.matrix(formula, m)
+y <- stats::model.response(m)
 theta.off <- data[,names(data)==profile.theta]
 id <- data[,names(data)==subject]
 	if(!is.numeric(theta.off)){
@@ -32,8 +32,8 @@ log.lik <- rep(NA, length)
 for(i in 1:length){
 pi <- theta[i]
 y.off <- y - pi*theta.off
-fit <- gls(y.off ~ -1 + X, correlation = correlation, method="ML", na.action=na.fail)
-log.lik[i] <- logLik(fit)
+fit <- nlme::gls(y.off ~ -1 + X, correlation = correlation, method="ML", na.action=stats::na.fail)
+log.lik[i] <- stats::logLik(fit)
 }
 
 theta <- theta[is.na(log.lik)!=1]

@@ -9,9 +9,9 @@ function(formula, data, profile.theta, method="logistic", lo.theta=NULL, hi.thet
 	if(!is.null(offset)){
 		stop("Warning message: 'offset' should not be provided")
 	}	
-m <- model.frame(formula, data)
-X <- model.matrix(formula, m)
-y <- model.response(m)
+m <- stats::model.frame(formula, data)
+X <- stats::model.matrix(formula, m)
+y <- stats::model.response(m)
 theta.off <- data[,names(data)==profile.theta]
 
 	if(!is.numeric(theta.off)){
@@ -29,9 +29,9 @@ log.lik <- rep(NA, length)
 
 for(i in 1:length){
 	pi <- theta[i]
-		if(length(X[1,])==1) { fit <- polr(y ~ X + offset(pi*theta.off), method=method, na.action=na.fail) }
-			else { fit <- polr(y ~ X[,-1] + offset(pi*theta.off), method=method, na.action=na.fail) }
-	log.lik[i] <- logLik(fit)
+		if(length(X[1,])==1) { fit <- MASS::polr(y ~ X + offset(pi*theta.off), method=method, na.action=stats::na.fail) }
+			else { fit <- MASS::polr(y ~ X[,-1] + offset(pi*theta.off), method=method, na.action=stats::na.fail) }
+	log.lik[i] <- stats::logLik(fit)
 	}
 
 theta <- theta[is.na(log.lik)!=1]

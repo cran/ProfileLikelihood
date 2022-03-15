@@ -9,9 +9,9 @@ function(formula, data, profile.theta, lo.theta=NULL, hi.theta=NULL, length=300,
 	if(!is.null(offset)){
 		stop("Warning message: 'offset' should not be provided")
 	}
-m <- model.frame(formula, data)
-X <- model.matrix(formula, m)
-y <- model.response(m)
+m <- stats::model.frame(formula, data)
+X <- stats::model.matrix(formula, m)
+y <- stats::model.response(m)
 theta.off <- data[,names(data)==profile.theta]
 	if(!is.numeric(theta.off)){
 		stop("Warning message: 'profile.theta' must be a numeric variable")
@@ -34,8 +34,8 @@ log.lik <- rep(NA, length)
 for(i in 1:length){
 pi <- theta[i]
 y.off <- y - pi*theta.off
-fit <- lm(y.off ~ -1 + X, na.action=na.fail)
-log.lik[i] <- logLik(fit)
+fit <- stats::lm(y.off ~ -1 + X, na.action=stats::na.fail)
+log.lik[i] <- stats::logLik(fit)
 }
 
 theta <- theta[is.na(log.lik)!=1]

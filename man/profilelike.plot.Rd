@@ -32,7 +32,7 @@ Royall, Richard M. (1997). Statistical Evidence: A Likelihood Paradiam. Chapman 
 Pawitan, Yudi (2001). In All Likelihood: Statistical Modelling and Inference Using Likelihood. Oxford University Press.
 }
 \author{
-Leena Choi <leena.choi@Vanderbilt.Edu>
+Leena Choi <naturechoi@gmail.com>
 }
 
 \seealso{

@@ -6,9 +6,9 @@ function(formula, data, subject, random, correlation=NULL, profile.theta, method
 	if(!is.null(weights)){
 		stop("Warning message: 'weights' should not be provided")
 	}
-m <- model.frame(formula, data)
-X <- model.matrix(formula, m)
-y <- model.response(m)
+m <- stats::model.frame(formula, data)
+X <- stats::model.matrix(formula, m)
+y <- stats::model.response(m)
 theta.off <- data[,names(data)==profile.theta]
 id <- data[,names(data)==subject]
 
@@ -20,7 +20,7 @@ id <- data[,names(data)==subject]
 		}
 		if( ( is.null(lo.theta) | is.null(hi.theta) )){
 			cat("Warning message: provide lo.theta and hi.theta \n")
-			fit <- lm(y ~ -1 + X + theta.off, na.action=na.fail)
+			fit <- stats::lm(y ~ -1 + X + theta.off, na.action=stats::na.fail)
 			mle <- summary(fit)$coefficient["theta.off",1]
 			se <- summary(fit)$coefficient["theta.off",2]
 			lo.theta <- round(mle - 4*se, round)
@@ -33,8 +33,8 @@ log.lik <- rep(NA, length)
 for(i in 1:length){
 pi <- theta[i]
 y.off <- y - pi*theta.off
-fit <- lme(y.off ~ -1 + X, random = random, correlation=correlation, method="ML", na.action=na.fail)
-log.lik[i] <- logLik(fit)
+fit <- nlme::lme(y.off ~ -1 + X, random = random, correlation=correlation, method="ML", na.action=stats::na.fail)
+log.lik[i] <- stats::logLik(fit)
 }
 
 theta <- theta[is.na(log.lik)!=1]

@@ -7,7 +7,7 @@ Profile Likelihood for Generalized Linear Models
 This function provides values for a profile likelihood and a normalized profile likelihood for a parameter of interest in a generalized linear model.
 }
 \usage{
-profilelike.glm(formula, data, profile.theta, family = gaussian, 
+profilelike.glm(formula, data, profile.theta, family = stats::gaussian, 
 	offset.glm = NULL, lo.theta = NULL, hi.theta = NULL, length = 300, 
 	round = 2, subset = NULL, weights = NULL, offset = NULL, ...)
 }
@@ -61,7 +61,7 @@ This function provides values for a profile likelihood and a normalized profile 
 \item{profile.lik.norm }{numerical values for a normalized profile likelihood ranging from 0 to 1.}
 }
 \author{
-Leena Choi <leena.choi@Vanderbilt.Edu>
+Leena Choi <naturechoi@gmail.com>
 }
 
 \section{Warning }{

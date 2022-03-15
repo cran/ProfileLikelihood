@@ -22,9 +22,9 @@ Use \code{\link{profilelike.summary}} to obtain the maximum profile likelihood e
 }
 
 \author{
-Leena Choi <leena.choi@Vanderbilt.Edu>
+Leena Choi <naturechoi@gmail.com>
 
-Maintainer: Leena Choi <leena.choi@Vanderbilt.Edu>
+Maintainer: Leena Choi <naturechoi@gmail.com>
 }
 
 \references{

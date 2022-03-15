@@ -1,5 +1,5 @@
 profilelike.glm <-
-function(formula, data, profile.theta, family=gaussian, offset.glm=NULL, lo.theta=NULL, hi.theta=NULL, length=300, round=2, subset=NULL, weights=NULL, offset=NULL, ...){
+function(formula, data, profile.theta, family=stats::gaussian, offset.glm=NULL, lo.theta=NULL, hi.theta=NULL, length=300, round=2, subset=NULL, weights=NULL, offset=NULL, ...){
 	if(!is.null(subset)){
 		stop("Warning message: 'subset' should not be provided")
 	}
@@ -9,9 +9,9 @@ function(formula, data, profile.theta, family=gaussian, offset.glm=NULL, lo.thet
 	if(!is.null(offset)){
 		stop("Warning message: do not use 'offset'; use 'offset.glm' instead of 'offset' ")
 	}
-m <- model.frame(formula, data)
-X <- model.matrix(formula, m)
-y <- model.response(m)
+m <- stats::model.frame(formula, data)
+X <- stats::model.matrix(formula, m)
+y <- stats::model.response(m)
 theta.off <- data[,names(data)==profile.theta]
 	if(!is.numeric(theta.off)){
 		stop("Warning message: 'profile.theta' must be a numeric variable")
@@ -21,7 +21,7 @@ theta.off <- data[,names(data)==profile.theta]
 		}
 		if( ( is.null(lo.theta) | is.null(hi.theta) )){
 			cat("Warning message: provide lo.theta and hi.theta \n")
-			fit <- glm(y ~ -1 + X + theta.off, family=family, na.action=na.fail)
+			fit <- stats::glm(y ~ -1 + X + theta.off, family=family, na.action=na.fail)
 			mle <- summary(fit)$coefficient["theta.off",1]
 			se <- summary(fit)$coefficient["theta.off",2]
 			lo.theta <- round(mle - 4*se, round)
@@ -33,12 +33,12 @@ log.lik <- rep(NA, length)
 
 for(i in 1:length){
 pi <- theta[i]
-fit <- glm(y ~ -1 + X + offset(pi*theta.off), family=family, na.action=na.fail)
+fit <- stats::glm(y ~ -1 + X + offset(pi*theta.off), family=family, na.action=na.fail)
 if(!is.null(offset.glm)){
 glm.off <- data[,names(data)==offset.glm]
-fit <- glm(y ~ -1 + X + offset(pi*theta.off) + offset(glm.off), family=family, na.action=na.fail)
+fit <- stats::glm(y ~ -1 + X + offset(pi*theta.off) + offset(glm.off), family=family, na.action=stats::na.fail)
 }
-log.lik[i] <- logLik(fit)
+log.lik[i] <- stats::logLik(fit)
 }
 
 theta <- theta[is.na(log.lik)!=1]

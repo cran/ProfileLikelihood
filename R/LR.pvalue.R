@@ -7,9 +7,9 @@ x1 <- n1-y1
 x2 <- n2-y2
 Y <- c(rep(1, s), rep(0, s.failure))
 treat <- c(rep(1, y1), rep(0, y2), rep(1, x1), rep(0, x2))
-fit.glm <- glm( Y ~ treat, family=binomial)
-mle <- summary.glm(fit.glm)$coefficients[2,1]
-se <- summary.glm(fit.glm)$coefficients[2,2]
+fit.glm <- stats::glm( Y ~ treat, family = stats::binomial)
+mle <- stats::summary.glm(fit.glm)$coefficients[2,1]
+se <- stats::summary.glm(fit.glm)$coefficients[2,2]
 
 if(y1==0 | y2==0){
 	cat("Warning message: Likelihood intervals, LRs and the corresonding p-values are not reliable with empty cells in 2-by-2 tables. \n")
@@ -42,15 +42,15 @@ for(i in 1:length(psi)){
 	if(int == -Inf){
 		low.int <- - 10000
 		up.int <- 1000
-		ff <- optimize(L, interval=c(low.int, up.int), maximum=TRUE)
+		ff <- stats::optimize(L, interval=c(low.int, up.int), maximum=TRUE)
 		} else if(int == Inf){
 		low.int <- - 1000
 		up.int <- 10000
-		ff <- optimize(L, interval=c(low.int, up.int), maximum=TRUE)
+		ff <- stats::optimize(L, interval=c(low.int, up.int), maximum=TRUE)
 		}	else{
 		low.int <- - 1000
 		up.int <- 1000
-		ff <- optimize(L, interval=c(low.int, up.int), maximum=TRUE)
+		ff <- stats::optimize(L, interval=c(low.int, up.int), maximum=TRUE)
 		}
 	par[i,] <- ff$maximum
 	log.lik[i] <- ff$objective
@@ -70,7 +70,7 @@ profile.LI.norm <- NULL
 
 H0.profile <- unique(profile.lik.norm[psi == 0])
 LR.profile <- H0.profile/1
-Pvalue.profile.LR <- 1- pchisq(-2*log(LR.profile), df=1)
+Pvalue.profile.LR <- 1- stats::pchisq(-2*log(LR.profile), df=1)
 
 cond.func <- function(y1, y2, n1, n2, OR){
 den.func <- function(y1, y2, n1, n2){
@@ -118,12 +118,12 @@ cond.LI.norm <- NULL
 	}
 
 LR.cond <- H0/mm.cond
-Pvalue.cond.LR <- 1- pchisq(-2*log(LR.cond), df=1)
+Pvalue.cond.LR <- 1- stats::pchisq(-2*log(LR.cond), df=1)
 
-tt <- matrix(c(y1, y2, (n1-y1), (n2-y2)), nr = 2, dimnames = list(c("treat", "control"), c("Success", "No success")))
-Pvalue.fisher.test <- fisher.test(tt)$p.value  
-Pvalue.chisq.cont.correction <- chisq.test(tt)$p.value 
-Pvalue.chisq.test <- chisq.test(tt, correct=FALSE)$p.value  
+tt <- matrix(c(y1, y2, (n1-y1), (n2-y2)), nrow = 2, dimnames = list(c("treat", "control"), c("Success", "No success")))
+Pvalue.fisher.test <- stats::fisher.test(tt)$p.value  
+Pvalue.chisq.cont.correction <- stats::chisq.test(tt)$p.value 
+Pvalue.chisq.test <- stats::chisq.test(tt, correct=FALSE)$p.value  
 
 return(list(mle.lor.uncond=mle, mle.lor.cond=mle.cond.lor, LI.norm.profile=profile.LI.norm, LI.norm.cond=cond.LI.norm, LR.profile=1/LR.profile, LR.cond=1/LR.cond, Pvalue.LR.profile=Pvalue.profile.LR, Pvalue.LR.cond=Pvalue.cond.LR, Pvalue.chisq.test=Pvalue.chisq.test, Pvalue.fisher.test=Pvalue.fisher.test, Pvalue.chisq.cont.correction=Pvalue.chisq.cont.correction))
 }

@@ -40,7 +40,7 @@ Royall, Richard M. (1997). Statistical Evidence: A Likelihood Paradiam. Chapman 
 Pawitan, Yudi (2001). In All Likelihood: Statistical Modelling and Inference Using Likelihood. Oxford University Press.
 }
 \author{
-Leena Choi <leena.choi@Vanderbilt.Edu>
+Leena Choi <naturechoi@gmail.com>
 }
 \seealso{
 \code{\link{profilelike.plot}}, \code{ \link{profilelike.lm}}, \code{ \link{profilelike.glm}}, \code{ \link{profilelike.polr}}, \code{ \link{profilelike.gls}}, \code{ \link{profilelike.lme}}

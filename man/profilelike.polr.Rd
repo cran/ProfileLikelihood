@@ -58,7 +58,7 @@ This function provides values for a profile likelihood and a normalized profile 
 \item{profile.lik.norm }{numerical values for a normalized profile likelihood ranging from 0 to 1.}
 }
 \author{
-Leena Choi <leena.choi@Vanderbilt.Edu>
+Leena Choi <naturechoi@gmail.com>
 }
 
 \section{Warning }{

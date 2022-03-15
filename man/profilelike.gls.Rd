@@ -61,7 +61,7 @@ This function provides values for a profile likelihood and a normalized profile 
 \item{profile.lik.norm }{numerical values for a normalized profile likelihood ranging from 0 to 1.}
 }
 \author{
-Leena Choi <leena.choi@Vanderbilt.Edu>
+Leena Choi <naturechoi@gmail.com>
 }
 
 \section{Warning }{
@@ -74,9 +74,9 @@ Leena Choi <leena.choi@Vanderbilt.Edu>
 \code{\link{profilelike.plot}}, \code{ \link{profilelike.summary}}, \code{ \link{profilelike.lm}}, \code{ \link{profilelike.glm}}, \code{ \link{profilelike.polr}}, \code{ \link{profilelike.lme}}, \code{ \link[nlme:gls]{gls}}
 }
 \examples{
-xx <- profilelike.gls(formula=yield ~ endpoint, correlation=corAR1(form = ~ 1 | id),
+data(Gasoline, package = "nlme")
+xx <- profilelike.gls(formula=yield ~ endpoint, correlation=nlme::corAR1(form = ~ 1 | id),
 	data=Gasoline, subject="Sample", profile.theta="vapor", method="ML", 
 	lo.theta=1, hi.theta=5, length=500, round=2)
 profilelike.plot(theta=xx$theta, profile.lik.norm=xx$profile.lik.norm, round=4)
 }
-

@@ -43,7 +43,7 @@ The function also provides the profile and conditional likelihood support interv
 \item{Pvalue.chisq.cont.correction }{p-value from Pearson's Chi-squared test with continuity correction.}
 }
 \author{
-Leena Choi <leena.choi@Vanderbilt.Edu>
+Leena Choi <naturechoi@gmail.com>
 }
 
 \section{Warning }{
