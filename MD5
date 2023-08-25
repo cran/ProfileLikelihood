@@ -1,4 +1,4 @@
-01c2596789359778f42904bdcd31399a *DESCRIPTION
+dc6dbf88a3700818a8e58c0986a4b16e *DESCRIPTION
 c4a409c0a1b8739bc4bc537ff325f41a *NAMESPACE
 9b074078bb94cec50ee33a5b47a4b071 *R/LR.pvalue.R
 8f9fa31225413bd4d07513e85d486f2e *R/profilelike.glm.R
@@ -11,7 +11,7 @@ ce9b11ea5d30d83ce21b14ace33b1c30 *R/profilelike.summary.R
 216954fd535c9d270852319c853afb68 *data/dataglm.rda
 6214b50ce2a7c64084f8f2ca332d9a55 *data/datapolr.rda
 71b2065e13d03a4ff8a1d66d39533f13 *man/LR.pvalue.Rd
-ab57f5752a1e53e5ce6779d5f5c3f312 *man/ProfileLikelihood-package.Rd
+fa7d0f406ae1235779305120d5a14101 *man/ProfileLikelihood-package.Rd
 80f4f63db79c67686ab338df7d243e1f *man/dataglm.Rd
 940e6e4984180155b7be01b09133ca2a *man/datapolr.Rd
 826562e82744db81f9882b7c6a579ff1 *man/profilelike.glm.Rd
